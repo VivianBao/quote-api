@@ -31,7 +31,23 @@ quotesRouter.get('/random', (req, res)=>{
 })
 
 quotesRouter.post('/', (req, res)=>{
-
+  // verify if query has quote and person
+  const query = req.query;
+  const quoteExists = Object.keys(query).includes('quote');
+  const personExists = Object.keys(query).includes('person');
+  if(quoteExists && personExists){
+    let newQuoteObj = {
+      quote: query.quote,
+      person: query.person
+    }
+    quotes.push(newQuoteObj)
+    let response = {
+      quote: newQuoteObj
+    };
+    res.send(response);
+  }else{
+    res.status(400).send();
+  }
 })
 
 
