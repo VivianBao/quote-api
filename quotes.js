@@ -1,5 +1,6 @@
 const express = require('express');
 const { quotes } = require('./data');
+const { getRandomElement } = require('./utils');
 
 const quotesRouter = express.Router();
 
@@ -22,6 +23,17 @@ quotesRouter.get('/', (req, res)=>{
   const response = {quotes: targetQuotesArr};
   res.send(response);
 })
+
+quotesRouter.get('/random', (req, res)=>{
+  const randomQuote = getRandomElement(quotes);
+  const response = {quote: randomQuote};
+  res.send(response);
+})
+
+quotesRouter.post('/', (req, res)=>{
+
+})
+
 
 
 module.exports = quotesRouter;
