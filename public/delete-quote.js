@@ -1,7 +1,9 @@
 const fetchButton = document.getElementById('find-quote');
 const foundQuoteContainer = document.getElementById('found-quote');
+const deleteButton = document.getElementById('delete-quote');
 
-// find quote(s)
+
+// find quote(s) --> endpoint fetch an array of quote obj
 fetchButton.addEventListener('click', () => {
   const query = {
     id: document.getElementById('id')?.value,
@@ -19,6 +21,7 @@ fetchButton.addEventListener('click', () => {
 
   fetch(`/api/quotes?${queryString}`)
   .then(response => response.json())
+  // get an array of quote obj --> need fix
   .then(({quote}) => {
     const foundQuote = document.createElement('div');
     foundQuote.innerHTML = `
@@ -28,10 +31,20 @@ fetchButton.addEventListener('click', () => {
     <button class="delete-quote">Delete Quote</button>
     `
     foundQuoteContainer.appendChild(foundQuote);
+
+    deleteQuote(quote.id);
   });
 });
 
-// delete quote
-deleteButton.addEventListener('click', () ={
-
-})
+const deleteQuote = (id) => {
+  deleteButton.addEventListener('click', () => {
+    fetch(`/api/quotes?id=${id}`)
+    .then(response => response.json())
+    .then(({quote}) => {
+      foundQuoteContainer.removeChild(foundQuote);
+      const deleteMsg = document.createElement('div');
+      deleteMsg.innerHTML = "<p>Quote removed!</p>";
+      foundQuoteContainer.appendChild(deleteMsg);
+    })
+  })
+}

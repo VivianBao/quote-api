@@ -4,17 +4,20 @@ const { getRandomElement } = require('./utils');
 
 const quotesRouter = express.Router();
 
-// get all quotes (if there's query, fetch by person)
+// get all quotes (check query, fetch by person/id/quote)
 quotesRouter.get('/', (req, res)=>{
   let targetQuotesArr = [];
-  const queryExists = Object.keys(req.query).length > 0
+  const query = req.query;
+  const queryExists = Object.keys(query).length > 0
   if(queryExists){
-    const person = req.query.person;
-    quotes.forEach((obj)=>{
-      if(obj.person === person){
+    // check query
+    Object.keys(query).forEach((keyName)=> {
+      quotes.forEach((obj)=>{
+       if(obj.keyName === query.keyName){
         targetQuotesArr.push(obj);
-      }
-    })
+       }
+      })
+    });
   }else{
     quotes.forEach((obj)=>{
       targetQuotesArr.push(obj);
@@ -55,9 +58,10 @@ quotesRouter.post('/', (req, res)=>{
 // find quote by id and update
 
 
-// delete quote
+// delete quote by id
 quotesRouter.delete('/', (req, res)=>{
   // should return an array of quote obj
+  // verify if quote exist
 })
 
 module.exports = quotesRouter;
