@@ -35,8 +35,7 @@ fetchButton.addEventListener('click', () => {
         fetch(`/api/quotes/${quote.id}`, {
           method: 'DELETE'
         })
-        .then(res => res.text()) // or res.json()
-        // .then(response => response.json())
+        .then(res => res.text())
         .then((data) => {
           console.log('data', data)
           foundQuoteContainer.innerHTML = '';
@@ -48,19 +47,3 @@ fetchButton.addEventListener('click', () => {
     });
   });
 });
-
-// const deleteQuote = (id) => {
-//   // console.log('func triggered' + `${id}`);
-//   fetch(`/api/quotes/${id}`, {
-//     method: 'DELETE'
-//   })
-//   .then(res => res.text()) // or res.json()
-//   // .then(response => response.json())
-//   .then((data) => {
-//     console.log('data', data)
-//     // foundQuoteContainer.innerHTML = '';
-//     // const deleteMsg = document.createElement('div');
-//     // deleteMsg.innerHTML = '<p>Quote removed!</p>';
-//     // foundQuoteContainer.appendChild(deleteMsg);
-//   })
-// }
