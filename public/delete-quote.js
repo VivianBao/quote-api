@@ -1,23 +1,37 @@
-const findButton = document.getElementById('find-quote');
-const newQuoteContainer = document.getElementById('new-quote');
+const fetchButton = document.getElementById('find-quote');
+const foundQuoteContainer = document.getElementById('found-quote');
 
-findButton.addEventListener('click', () => {
-  const id = document.getElementById('id').value;
-  const quote = document.getElementById('quote').value;
-  const person = document.getElementById('person').value;
+// find quote(s)
+fetchButton.addEventListener('click', () => {
+  const query = {
+    id: document.getElementById('id')?.value,
+    quote: document.getElementById('quote')?.value,
+    person: document.getElementById('person')?.value
+  }
 
-  fetch(`/api/quotes?id=${id}&quote=${quote}&person=${person}`, {
-    method: 'DELETE',
+  // add values (if exist) to query
+  let queryString = '';
+  query.forEach((prop) => {
+    if(prop?.value){
+      queryString.concat(`${prop.id}=${prop.value}`);
+    }
   })
+
+  fetch(`/api/quotes?${queryString}`)
   .then(response => response.json())
-  // .then(({quote}) => {
-  //   const foundQuote = document.createElement('div');
-  //   foundQuote.innerHTML = `
-  //   <h3>Select the quote you want to delete:</h3>
-  //   <div class="quote-text">${quote.quote}</div>
-  //   <div class="attribution">- ${quote.person}</div>
-  //   <p>Go to the <a href="index.html">home page</a> to request and view all quotes.</p>
-  //   `
-  //   newQuoteContainer.appendChild(newQuote);
-  // });
+  .then(({quote}) => {
+    const foundQuote = document.createElement('div');
+    foundQuote.innerHTML = `
+    <h3>Select the quote you want to delete:</h3>
+    <div class="quote-text">${quote.quote}</div>
+    <div class="attribution">- ${quote.person}</div>
+    <button class="delete-quote">Delete Quote</button>
+    `
+    foundQuoteContainer.appendChild(foundQuote);
+  });
 });
+
+// delete quote
+deleteButton.addEventListener('click', () ={
+
+})
