@@ -56,6 +56,8 @@ quotesRouter.post('/', (req, res)=>{
 
 
 // delete quote
+quotesRouter.delete('/', (req, res)=>{
 
+})
 
 module.exports = quotesRouter;
