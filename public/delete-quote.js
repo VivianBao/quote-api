@@ -27,10 +27,10 @@ fetchButton.addEventListener('click', () => {
       <h3>Select the quote you want to delete:</h3>
       <div class="quote-text">${quote.quote}</div>
       <div class="attribution">- ${quote.person}</div>
-      <button id="delete-quote">Delete Quote</button>
+      <button id=${`delete-quote-${quote.id}`}>Delete Quote</button>
       `
       foundQuoteContainer.appendChild(foundQuote);
-      const deleteButton = document.getElementById("delete-quote");
+      let deleteButton = document.getElementById(`delete-quote-${quote.id}`);
       deleteButton.addEventListener('click', () => {
         fetch(`/api/quotes/${quote.id}`, {
           method: 'DELETE'
