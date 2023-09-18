@@ -8,15 +8,22 @@ const quotesRouter = express.Router();
 quotesRouter.get('/', (req, res)=>{
   let targetQuotesArr = [];
   const query = req.query;
+  console.log(query);
   const queryExists = Object.keys(query).length > 0
   if(queryExists){
-    Object.keys(query).forEach((keyName)=> {
-      quotes.forEach((obj)=>{
-       if(obj.keyName === query.keyName){
+    // bug: will have duplicate if search with two query
+    // Object.keys(query).forEach((keyName)=> {
+    //   quotes.forEach((obj)=>{
+    //    if(obj.keyName === query.keyName){
+    //     targetQuotesArr.push(obj);
+    //    }
+    //   })
+    // });
+    quotes.forEach((obj)=>{
+      if(obj.person === query.person){
         targetQuotesArr.push(obj);
-       }
-      })
-    });
+      }
+    })
   }else{
     quotes.forEach((obj)=>{
       targetQuotesArr.push(obj);

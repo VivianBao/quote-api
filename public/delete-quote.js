@@ -1,28 +1,27 @@
 const fetchButton = document.getElementById('find-quote');
 const foundQuoteContainer = document.getElementById('found-quote');
-const deleteButton = document.getElementById('delete-quote');
 
 
 // find quote(s) --> endpoint fetch an array of quote obj
 fetchButton.addEventListener('click', () => {
   const query = {
-    id: document.getElementById('id')?.value,
-    quote: document.getElementById('quote')?.value,
-    person: document.getElementById('person')?.value
-  }
-
-  // add values (if exist) to query
+    // id: document.getElementById('delete-id')?.value,
+    // quote: document.getElementById('delete-quote')?.value,
+    person: document.getElementById('delete-person')?.value
+  };
+  // add values (if exist) to query bug: multiple query
   let queryString = '';
-  query.forEach((prop) => {
-    if(prop?.value){
-      queryString.concat(`${prop.id}=${prop.value}`);
-    }
-  })
+  Object.keys(query).forEach((keyName)=> {
+    if(query[keyName]){
+      queryString = queryString.concat(`${keyName}=${query[keyName]}`);
+    };
+  });
   // get with query endpoint
   fetch(`/api/quotes?${queryString}`)
   .then(response => response.json())
-  // get an array of quote obj --> need fix
-  .then(({res}) => {
+  // get an array of quote obj
+  .then((res) => {
+    console.log(res);
     res.quotes.forEach((quote)=>{
       const foundQuote = document.createElement('div');
       foundQuote.innerHTML = `
@@ -32,8 +31,9 @@ fetchButton.addEventListener('click', () => {
       <button class="delete-quote">Delete Quote</button>
       `
       foundQuoteContainer.appendChild(foundQuote);
+      // const deleteButton = document.getElementById('delete-quote');
       // add event listener for delete
-      deleteQuote(quote.id);
+      // deleteQuote(quote.id);
     });
   });
 });
