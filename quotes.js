@@ -10,7 +10,6 @@ quotesRouter.get('/', (req, res)=>{
   const query = req.query;
   const queryExists = Object.keys(query).length > 0
   if(queryExists){
-    // check query
     Object.keys(query).forEach((keyName)=> {
       quotes.forEach((obj)=>{
        if(obj.keyName === query.keyName){
