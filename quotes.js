@@ -40,13 +40,16 @@ quotesRouter.get('/random', (req, res)=>{
   res.send(response);
 })
 
-// create new quote
+// create new quote now with id too
 quotesRouter.post('/', (req, res)=>{
   const query = req.query;
   const quoteExists = Object.keys(query).includes('quote');
   const personExists = Object.keys(query).includes('person');
   if(quoteExists && personExists){
+    // find last index of quotes
+    let newId = quotes.indexOf(quotes[quotes.length - 1]);
     let newQuoteObj = {
+      id: newId,
       quote: query.quote,
       person: query.person
     }

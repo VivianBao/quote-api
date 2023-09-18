@@ -37,7 +37,7 @@ fetchButton.addEventListener('click', () => {
         })
         .then(res => res.text())
         .then((data) => {
-          console.log('data', data)
+          // console.log('data', data)
           foundQuoteContainer.innerHTML = '';
           const deleteMsg = document.createElement('div');
           deleteMsg.innerHTML = '<p>Quote removed!</p>';
