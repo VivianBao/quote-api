@@ -63,11 +63,20 @@ quotesRouter.post('/', (req, res)=>{
 // update quote
 // find quote by id and update
 
-
-// delete quote by id
-quotesRouter.delete('/', (req, res)=>{
-  // should return an array of quote obj
-  // verify if quote exist
+quotesRouter.delete('/:id', (req, res)=>{
+  const id = req.params.id;
+  let targetIndex;
+  quotes.forEach((quote, index) => {
+    if(quote.id.toString() === id){
+      targetIndex = index;
+    }
+  })
+  if(targetIndex){
+    quotes.splice(targetIndex, 1);
+    res.status(204).send(quotes);
+  }else{
+    res.status(404).send();
+  }
 })
 
 module.exports = quotesRouter;

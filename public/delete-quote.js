@@ -21,34 +21,46 @@ fetchButton.addEventListener('click', () => {
   .then(response => response.json())
   // get an array of quote obj
   .then((res) => {
-    console.log(res);
     res.quotes.forEach((quote)=>{
       const foundQuote = document.createElement('div');
       foundQuote.innerHTML = `
       <h3>Select the quote you want to delete:</h3>
       <div class="quote-text">${quote.quote}</div>
       <div class="attribution">- ${quote.person}</div>
-      <button class="delete-quote">Delete Quote</button>
+      <button id="delete-quote">Delete Quote</button>
       `
       foundQuoteContainer.appendChild(foundQuote);
-      // const deleteButton = document.getElementById('delete-quote');
-      // add event listener for delete
-      // deleteQuote(quote.id);
+      const deleteButton = document.getElementById("delete-quote");
+      deleteButton.addEventListener('click', () => {
+        fetch(`/api/quotes/${quote.id}`, {
+          method: 'DELETE'
+        })
+        .then(res => res.text()) // or res.json()
+        // .then(response => response.json())
+        .then((data) => {
+          console.log('data', data)
+          foundQuoteContainer.innerHTML = '';
+          const deleteMsg = document.createElement('div');
+          deleteMsg.innerHTML = '<p>Quote removed!</p>';
+          foundQuoteContainer.appendChild(deleteMsg);
+        })
+      });
     });
   });
 });
 
-const deleteQuote = (id) => {
-  deleteButton.addEventListener('click', () => {
-    fetch(`/api/quotes?id=${id}`, {
-      method: 'DELETE'
-    })
-    .then(response => response.json())
-    .then(({quote}) => {
-      foundQuoteContainer.innerHTML = '';
-      const deleteMsg = document.createElement('div');
-      deleteMsg.innerHTML = "<p>Quote removed!</p>";
-      foundQuoteContainer.appendChild(deleteMsg);
-    })
-  })
-}
+// const deleteQuote = (id) => {
+//   // console.log('func triggered' + `${id}`);
+//   fetch(`/api/quotes/${id}`, {
+//     method: 'DELETE'
+//   })
+//   .then(res => res.text()) // or res.json()
+//   // .then(response => response.json())
+//   .then((data) => {
+//     console.log('data', data)
+//     // foundQuoteContainer.innerHTML = '';
+//     // const deleteMsg = document.createElement('div');
+//     // deleteMsg.innerHTML = '<p>Quote removed!</p>';
+//     // foundQuoteContainer.appendChild(deleteMsg);
+//   })
+// }
