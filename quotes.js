@@ -24,14 +24,15 @@ quotesRouter.get('/', (req, res)=>{
   res.send(response);
 })
 
+// get random quote
 quotesRouter.get('/random', (req, res)=>{
   const randomQuote = getRandomElement(quotes);
   const response = {quote: randomQuote};
   res.send(response);
 })
 
+// create new quote
 quotesRouter.post('/', (req, res)=>{
-  // verify if query has quote and person
   const query = req.query;
   const quoteExists = Object.keys(query).includes('quote');
   const personExists = Object.keys(query).includes('person');
@@ -50,6 +51,11 @@ quotesRouter.post('/', (req, res)=>{
   }
 })
 
+// update quote
+// find quote by id and update
+
+
+// delete quote
 
 
 module.exports = quotesRouter;
