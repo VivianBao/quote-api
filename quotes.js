@@ -1,6 +1,6 @@
 const express = require('express');
 const { quotes } = require('./data');
-const { getRandomElement } = require('./utils');
+const { getRandomElement, getIndexById } = require('./utils');
 
 const quotesRouter = express.Router();
 
@@ -64,22 +64,30 @@ quotesRouter.post('/', (req, res)=>{
 })
 
 // update quote
-// find quote by id and update
+// find quote by person (client side) and update with person and quote
+quotesRouter.put('/:id', (req, res)=>{
+  const id = req.params.id;
+  const targetIndex = getIndexById(id, quotes);
+  const updateData = req.query;
+  if(targetIndex && updateData){
+    const oldData = quotes[targetIndex];
+    quotes[targetIndex] = {...oldData, ...updateData}
+    res.status(204).send(quotes);
+  }else{
+    res.status(404).send();
+  }
+})
 
+// delete quote
 quotesRouter.delete('/:id', (req, res)=>{
   const id = req.params.id;
-  let targetIndex;
-  quotes.forEach((quote, index) => {
-    if(quote.id.toString() === id){
-      targetIndex = index;
-    }
-  })
+  const targetIndex = getIndexById(id, quotes);
   if(targetIndex){
     quotes.splice(targetIndex, 1);
     res.status(204).send(quotes);
   }else{
     res.status(404).send();
   }
-})
+});
 
 module.exports = quotesRouter;
