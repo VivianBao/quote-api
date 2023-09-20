@@ -23,7 +23,9 @@ const renderQuotes = (quotes = []) => {
       const newQuote = document.createElement('div');
       newQuote.className = 'single-quote';
       newQuote.innerHTML = `<div class="quote-text">${quote.quote}</div>
-      <div class="attribution">- ${quote.person}</div>`;
+      <div class="attribution">- ${quote.person}</div>
+      <a href="quote.html">Edit</a>
+      <a href="delete-quote.html">Delete</a>`;
       quoteContainer.appendChild(newQuote);
     });
   } else {
