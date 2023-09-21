@@ -53,6 +53,7 @@ const renderQuotes = (quotes = []) => {
 };
 
 fetchAllButton.addEventListener('click', () => {
+  console.log('fetch all triggered');
   fetch('/api/quotes')
   .then(response => {
     if (response.ok) {
