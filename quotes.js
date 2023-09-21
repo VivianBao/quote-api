@@ -86,18 +86,17 @@ quotesRouter.get('/:id', (req, res)=>{
 });
 
 // Update action
-// find quote by person (client side) and update with person and quote
 quotesRouter.put('/:id', (req, res)=>{
   const id = req.params.id;
   const targetIndex = getIndexById(id, quotes);
-  const updateData = req.query;
-  console.log('put route')
-  console.log(req);
+  const updateData = req.body;
+  console.log(req.body);
   if(targetIndex !== null && updateData){
+    console.log('success');
     const oldData = quotes[targetIndex];
     quotes[targetIndex] = {...oldData, ...updateData}
     // res.status(204).send(quotes);
-    res.status(204).render('home', {
+    res.render('home', {
       quote: quotes[targetIndex],
       style: 'styles.css'
     })
