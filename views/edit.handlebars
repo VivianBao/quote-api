@@ -1,20 +1,23 @@
 <div>This is edit-quote</div>
 
-<form method="POST" action="/reviews/{{review._id}}?_method=PUT">
+<form method="POST" action="/api/quotes/{{quote.id}}?_method=PUT">
   <fieldset>
     <legend>Edit Quote</legend>
-    <div class="inputs">
+    <div>
       <label for="quote">Quote text:</label>
-      <textarea id="quote">{{quote.quote}}</textarea>
-      <label for="person">Author:</label>
-      <input id="person" value="{{quote.person}}">
+      <textarea id="quote" name="quote">{{quote.quote}}</textarea>
     </div>
     <div>
+      <label for="person">Author:</label>
+      <input id="person" name="person" value="{{quote.person}}">
+    </div>
   </fieldset>
-  <button id="update-quote">Update Your Quote</button>
+  <div>
+    <button type="submit">Update Your Quote</button>
+  </div>
 </form>
 
 <div id="updated-quote-container">
 </div>
 
-<script src="js/update-quote.js"></script>
+{{!-- <script src="js/update-quote.js"></script> --}}

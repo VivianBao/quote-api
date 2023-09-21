@@ -91,7 +91,9 @@ quotesRouter.put('/:id', (req, res)=>{
   const id = req.params.id;
   const targetIndex = getIndexById(id, quotes);
   const updateData = req.query;
-  if(targetIndex && updateData){
+  console.log('put route')
+  console.log(req);
+  if(targetIndex !== null && updateData){
     const oldData = quotes[targetIndex];
     quotes[targetIndex] = {...oldData, ...updateData}
     // res.status(204).send(quotes);
