@@ -41,6 +41,13 @@ quotesRouter.get('/random', (req, res)=>{
   res.send(response);
 })
 
+// New page
+quotesRouter.get('/new', (req, res)=>{
+  res.render('new', {
+    style: 'styles.css'
+  })
+});
+
 // Create action - create new quote now with id too
 quotesRouter.post('/', (req, res)=>{
   const query = req.query;
