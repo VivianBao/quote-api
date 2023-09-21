@@ -1,16 +1,3 @@
 <form method="POST" action="/api/quotes/{{quote.id}}?_method=PUT">
-  <fieldset>
-    <legend>Edit Quote</legend>
-    <div>
-      <label for="quote">Quote text:</label>
-      <textarea id="quote" name="quote">{{quote.quote}}</textarea>
-    </div>
-    <div>
-      <label for="person">Author:</label>
-      <input id="person" name="person" value="{{quote.person}}">
-    </div>
-  </fieldset>
-  <div>
-    <button type="submit">Update Your Quote</button>
-  </div>
+  {{> form}}
 </form>

@@ -49,9 +49,7 @@ quotesRouter.get('/new', (req, res)=>{
       quote: "",
       person: ""
     },
-    method: "POST",
     title: "Create a New Quote",
-    url: "/api/quotes/new",
     submit: "Create Your Quote"
   })
 });
@@ -82,8 +80,10 @@ quotesRouter.get('/:id', (req, res)=>{
   const targetIndex = getIndexById(id, quotes);
   if(targetIndex !== null){
     res.render('edit', {
+      style: "styles.css",
       quote: quotes[targetIndex],
-      style: "styles.css"
+      title: "Create a New Quote",
+      submit: "Update Your Quote"
     });
   }else{
     res.status(404).send();
