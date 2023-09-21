@@ -3,33 +3,38 @@ let { quotes } = require('./data');
 const { getRandomElement, getIndexById } = require('./utils');
 
 const quotesRouter = express.Router();
-
+// Home page
 quotesRouter.get('/', (req, res) => {
     res.render('home', {style: 'styles.css'});
 });
+
 // Show all/show person quote page -get all quotes (check query, fetch by person/id/quote)
 // could update to /api/quotes/:person
 quotesRouter.get('/all', (req, res)=>{
   let targetQuotesArr = [];
-  const query = req.query;
-  const queryExists = Object.keys(query).length > 0
-  if(queryExists){
-    quotes.forEach((obj)=>{
-      if(obj.person === query.person){
-        targetQuotesArr.push(obj);
-      }
-    })
-  }else{
-    quotes.forEach((obj)=>{
+  quotes.forEach((obj)=>{
+    targetQuotesArr.push(obj);
+  })
+  const response = {quotes: targetQuotesArr};
+  res.send(response);
+})
+
+quotesRouter.get('/all/:person', (req, res)=>{
+  console.log('person route passed')
+  let targetQuotesArr = [];
+  const author = req.params.person
+  quotes.forEach((obj)=>{
+    if(obj.person === author){
       targetQuotesArr.push(obj);
-    })
-  }
+    }
+  })
   const response = {quotes: targetQuotesArr};
   res.send(response);
 })
 
 // Show Random page - get random quote
 quotesRouter.get('/random', (req, res)=>{
+  console.log('random route passed')
   const randomQuote = getRandomElement(quotes);
   const response = {quote: randomQuote};
   res.send(response);
