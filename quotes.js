@@ -4,8 +4,6 @@ const { getRandomElement, getIndexById } = require('./utils');
 
 const quotesRouter = express.Router();
 
-console.log(quotes);
-
 quotesRouter.get('/', (req, res) => {
     res.render('home', {style: 'styles.css'});
 });
@@ -15,17 +13,8 @@ quotesRouter.get('/all', (req, res)=>{
   console.log(quotes);
   let targetQuotesArr = [];
   const query = req.query;
-  console.log(query);
   const queryExists = Object.keys(query).length > 0
   if(queryExists){
-    // bug: will have duplicate if search with two query
-    // Object.keys(query).forEach((keyName)=> {
-    //   quotes.forEach((obj)=>{
-    //    if(obj.keyName === query.keyName){
-    //     targetQuotesArr.push(obj);
-    //    }
-    //   })
-    // });
     quotes.forEach((obj)=>{
       if(obj.person === query.person){
         targetQuotesArr.push(obj);
@@ -69,8 +58,6 @@ quotesRouter.post('/', (req, res)=>{
   const quoteExists = Object.keys(query).includes('quote');
   const personExists = Object.keys(query).includes('person');
   if(quoteExists && personExists){
-    // find last index of quotes
-    // [0, 1, 2, 3, 4]
     const lastQuoteObj = quotes[quotes.length - 1];
     const newId = lastQuoteObj.id + 1
     let newQuoteObj = {
@@ -84,7 +71,7 @@ quotesRouter.post('/', (req, res)=>{
     // };
     res.render('home', {
       style: "styles.css",
-      quote: newQuoteObj
+      quotes: newQuoteObj
     });
   }else{
     res.status(400).send();
@@ -128,8 +115,7 @@ quotesRouter.delete('/:id', (req, res)=>{
   const targetIndex = getIndexById(id, quotes);
   if(targetIndex){
     quotes.splice(targetIndex, 1);
-    console.log(quotes);
-    res.status(204).send(quotes);
+    res.send(quotes);
   }else{
     res.status(404).send();
   }

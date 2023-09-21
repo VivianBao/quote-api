@@ -54,10 +54,16 @@ const renderQuotes = (quotes = []) => {
           .then(response => {
             if (response.ok) {
               alert("Quote deleted!")
-              // return response.json();
+              resetQuotes();
+              return response.json();
             } else {
               renderError(response);
             }
+          })
+          .then(quotes => {
+            console.log(typeof quotes)
+            console.log(quotes)
+            renderQuotes.call(this, quotes);
           })
         })
       })
