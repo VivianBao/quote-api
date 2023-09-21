@@ -75,8 +75,11 @@ quotesRouter.post('/', (req, res)=>{
 quotesRouter.get('/:id', (req, res)=>{
   const id = req.params.id;
   const targetIndex = getIndexById(id, quotes);
-  if(targetIndex){
-    res.status(204).send(quotes[targetIndex]);
+  if(targetIndex !== null){
+    res.status(204).render('edit', {
+      quote: quotes[targetIndex],
+      style: "styles.css"
+    });
   }else{
     res.status(404).send();
   }
