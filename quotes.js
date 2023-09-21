@@ -44,13 +44,22 @@ quotesRouter.get('/random', (req, res)=>{
 // New page
 quotesRouter.get('/new', (req, res)=>{
   res.render('new', {
-    style: 'styles.css'
+    style: 'styles.css',
+    quote: {
+      id: null,
+      quote: "",
+      person: ""
+    },
+    method: "POST",
+    title: "Create a New Quote",
+    url: "/api/quotes",
+    submit: "Create Your Quote"
   })
 });
 
 // Create action - create new quote now with id too
 quotesRouter.post('/', (req, res)=>{
-  const query = req.query;
+  const query = req.body;
   const quoteExists = Object.keys(query).includes('quote');
   const personExists = Object.keys(query).includes('person');
   if(quoteExists && personExists){
@@ -62,10 +71,13 @@ quotesRouter.post('/', (req, res)=>{
       person: query.person
     }
     quotes.push(newQuoteObj)
-    let response = {
+    // let response = {
+    //   quote: newQuoteObj
+    // };
+    res.render('home', {
+      style: "styles.css",
       quote: newQuoteObj
-    };
-    res.send(response);
+    });
   }else{
     res.status(400).send();
   }
@@ -90,12 +102,9 @@ quotesRouter.put('/:id', (req, res)=>{
   const id = req.params.id;
   const targetIndex = getIndexById(id, quotes);
   const updateData = req.body;
-  console.log(req.body);
   if(targetIndex !== null && updateData){
-    console.log('success');
     const oldData = quotes[targetIndex];
     quotes[targetIndex] = {...oldData, ...updateData}
-    // res.status(204).send(quotes);
     res.render('home', {
       quote: quotes[targetIndex],
       style: 'styles.css'
