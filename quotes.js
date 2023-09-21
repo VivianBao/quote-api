@@ -10,7 +10,6 @@ quotesRouter.get('/', (req, res) => {
 // Show all/show person quote page -get all quotes (check query, fetch by person/id/quote)
 // could update to /api/quotes/:person
 quotesRouter.get('/all', (req, res)=>{
-  console.log(quotes);
   let targetQuotesArr = [];
   const query = req.query;
   const queryExists = Object.keys(query).length > 0
@@ -54,7 +53,6 @@ quotesRouter.get('/new', (req, res)=>{
 
 // Create action - create new quote now with id too
 quotesRouter.post('/new', (req, res)=>{
-  console.log('post route passed')
   const query = req.body;
   const quoteExists = Object.keys(query).includes('quote');
   const personExists = Object.keys(query).includes('person');
@@ -67,9 +65,6 @@ quotesRouter.post('/new', (req, res)=>{
       person: query.person
     }
     quotes.push(newQuoteObj)
-    // let response = {
-    //   quote: newQuoteObj
-    // };
     res.redirect('/api/quotes');
   }else{
     res.status(400).send();
