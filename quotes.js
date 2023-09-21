@@ -1,5 +1,5 @@
 const express = require('express');
-const { quotes } = require('./data');
+let { quotes } = require('./data');
 const { getRandomElement, getIndexById } = require('./utils');
 
 const quotesRouter = express.Router();
@@ -47,13 +47,14 @@ quotesRouter.get('/new', (req, res)=>{
     },
     method: "POST",
     title: "Create a New Quote",
-    url: "/api/quotes",
+    url: "/api/quotes/new",
     submit: "Create Your Quote"
   })
 });
 
 // Create action - create new quote now with id too
-quotesRouter.post('/', (req, res)=>{
+quotesRouter.post('/new', (req, res)=>{
+  console.log('post route passed')
   const query = req.body;
   const quoteExists = Object.keys(query).includes('quote');
   const personExists = Object.keys(query).includes('person');
@@ -69,10 +70,7 @@ quotesRouter.post('/', (req, res)=>{
     // let response = {
     //   quote: newQuoteObj
     // };
-    res.render('home', {
-      style: "styles.css",
-      quotes: newQuoteObj
-    });
+    res.redirect('/api/quotes');
   }else{
     res.status(400).send();
   }
