@@ -24,14 +24,33 @@ const renderQuotes = (quotes = []) => {
       newQuote.className = 'single-quote';
       newQuote.innerHTML = `<div class="quote-text">${quote.quote}</div>
       <div class="attribution">- ${quote.person}</div>
-      <a href="quote.html">Edit</a>
-      <a href="delete-quote.html">Delete</a>`;
+      <a id="edit-button" href="quote.html">Edit</a>
+      <a id="delete-button" href="delete-quote.html">Delete</a>`;
       quoteContainer.appendChild(newQuote);
+      // add event listener to edit & delete button
+      const editButton = document.getElementById('edit-button');
+      const deleteButton = document.getElementById('delete-button');
+
+      //
+      editButton.addEventListener("click", () => {
+        fetch('/api/quotes/:id', {
+        })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            renderError(response);
+          }})
+        // response data would be single quote obj
+        .then(data => {
+          res.render("update.html", {quote: data})
+        })
+      })
     });
   } else {
     quoteContainer.innerHTML = '<p>Your request returned no quotes.</p>';
   }
-}
+};
 
 fetchAllButton.addEventListener('click', () => {
   fetch('/api/quotes')
@@ -61,6 +80,7 @@ fetchRandomButton.addEventListener('click', () => {
   });
 });
 
+// could udpate to /api/quotes/:person
 fetchByAuthorButton.addEventListener('click', () => {
   const author = document.getElementById('author').value;
   fetch(`/api/quotes?person=${author}`)
