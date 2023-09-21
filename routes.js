@@ -8,8 +8,7 @@ quotesRouter.get('/', (req, res) => {
     res.render('home', {style: 'styles.css'});
 });
 
-// Show all/show person quote page -get all quotes (check query, fetch by person/id/quote)
-// could update to /api/quotes/:person
+// [Read] Get action -all quotes
 quotesRouter.get('/all', (req, res)=>{
   let targetQuotesArr = [];
   quotes.forEach((obj)=>{
@@ -19,6 +18,7 @@ quotesRouter.get('/all', (req, res)=>{
   res.send(response);
 })
 
+// [Read] Get action -quotes by person
 quotesRouter.get('/all/:person', (req, res)=>{
   console.log('person route passed')
   let targetQuotesArr = [];
@@ -32,7 +32,7 @@ quotesRouter.get('/all/:person', (req, res)=>{
   res.send(response);
 })
 
-// Show Random page - get random quote
+// [Read] Get action -random quote
 quotesRouter.get('/random', (req, res)=>{
   console.log('random route passed')
   const randomQuote = getRandomElement(quotes);
@@ -56,7 +56,7 @@ quotesRouter.get('/new', (req, res)=>{
   })
 });
 
-// Create action - create new quote now with id too
+// [Create] Post action
 quotesRouter.post('/new', (req, res)=>{
   const query = req.body;
   const quoteExists = Object.keys(query).includes('quote');
@@ -76,7 +76,7 @@ quotesRouter.post('/new', (req, res)=>{
   }
 })
 
-// Edit page - returns single quote obj
+// Edit page - pass single-quote obj to handlebars page
 quotesRouter.get('/:id', (req, res)=>{
   const id = req.params.id;
   const targetIndex = getIndexById(id, quotes);
@@ -90,7 +90,7 @@ quotesRouter.get('/:id', (req, res)=>{
   }
 });
 
-// Update action
+// [Update] Put action
 quotesRouter.put('/:id', (req, res)=>{
   const id = req.params.id;
   const targetIndex = getIndexById(id, quotes);
@@ -107,7 +107,7 @@ quotesRouter.put('/:id', (req, res)=>{
   }
 })
 
-// Delete action
+// [Delete] Delete action
 quotesRouter.delete('/:id', (req, res)=>{
   const id = req.params.id;
   const targetIndex = getIndexById(id, quotes);

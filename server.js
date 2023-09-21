@@ -1,7 +1,7 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const app = express();
-const quotesRouter = require('./quotes');
+const quotesRouter = require('./routes');
 const { engine } = require('express-handlebars');
 
 const PORT = process.env.PORT || 4001;
