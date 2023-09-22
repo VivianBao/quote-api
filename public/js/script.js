@@ -21,8 +21,8 @@ const renderQuotes = (quotes = []) => {
         <div class="quote-text">${quote.quote}</div>
         <div class="attribution">- ${quote.person}</div>`
       const buttonsHTML = `
-        <a href="/api/quotes/${quote.id}">Edit</a>
-        <button id="open-dialog-${quote.id}">Delete</button>`
+        <a class="icon" href="/api/quotes/${quote.id}"><i class="fa-regular fa-pen-to-square fa-lg"></i></a>
+        <div id="open-dialog-${quote.id}" class="icon"><i class="fa-regular fa-trash-can fa-lg"></i></div>`
 
       // edit & delete btns
       const buttonsContainer = document.createElement('div');
@@ -35,8 +35,8 @@ const renderQuotes = (quotes = []) => {
       // add single quote
       const newQuote = document.createElement('div');
       newQuote.className = 'single-quote';
-      newQuote.appendChild(buttonsContainer);
       newQuote.appendChild(quoteInfoContainer);
+      newQuote.appendChild(buttonsContainer);
       quoteContainer.appendChild(newQuote);
 
       // add delete alert

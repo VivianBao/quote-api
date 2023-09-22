@@ -7,6 +7,11 @@ body {
   font-family: 'Nunito Sans', sans-serif;
 }
 
+div, a, button{
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+}
+
 h1{
   font-size: 32px;
   font-weight: bold;
@@ -144,14 +149,56 @@ button:hover {
 }
 
 #quote-container {
-  padding: 10px;
-  width: 60%;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  margin-top: 40px;
 }
 
 .single-quote {
-  padding: 10px;
+  padding: 20px;
+  width: 50%;
+  display: flex;
+  gap: 20px;
+  /* background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px; */
 }
 
+.quote-info-container{
+  overflow: scroll;
+  align-self: stretch;
+  flex-grow: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+}
 .quote-text {
   font-style: italic;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.attribution{
+  text-align: right;
+}
+
+.buttons-container{
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  gap: 15px;
+}
+
+.buttons-container .icon i{
+  color: rgba(15, 44, 89, 0.8);
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+}
+
+.buttons-container .icon i:hover{
+  transform: scale(1.3);
 }
