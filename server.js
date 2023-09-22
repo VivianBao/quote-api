@@ -28,6 +28,10 @@ app.set('views', './views');
 // set up routes
 app.use('/api/quotes', quotesRouter);
 
+app.get('/',(req, res) => {
+    res.redirect('api/quotes')
+});
+
 app.listen(PORT, ()=>{
   console.log(`Server is listening on ${PORT}`);
 });
