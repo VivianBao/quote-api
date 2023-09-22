@@ -24,10 +24,19 @@ const renderQuotes = (quotes = []) => {
         <a href="/api/quotes/${quote.id}">Edit</a>
         <button id="open-dialog-${quote.id}">Delete</button>`
 
+      // edit & delete btns
+      const buttonsContainer = document.createElement('div');
+      buttonsContainer.className = "buttons-container";
+      buttonsContainer.innerHTML = buttonsHTML;
+      // quote info
+      const quoteInfoContainer = document.createElement('div');
+      quoteInfoContainer.className = "quote-info-container";
+      quoteInfoContainer.innerHTML = singleQuoteContentHTML;
       // add single quote
       const newQuote = document.createElement('div');
       newQuote.className = 'single-quote';
-      newQuote.innerHTML = singleQuoteContentHTML + buttonsHTML
+      newQuote.appendChild(buttonsContainer);
+      newQuote.appendChild(quoteInfoContainer);
       quoteContainer.appendChild(newQuote);
 
       // add delete alert
