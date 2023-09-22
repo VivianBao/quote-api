@@ -1,14 +1,14 @@
 <fieldset>
-  <legend>{{title}}</legend>
+  {{!-- <legend>{{title}}</legend> --}}
   <div>
-    <label for="quote">Quote:</label>
+    <label for="quote">Quote</label>
     <textarea id="quote" name="quote">{{quote.quote}}</textarea>
   </div>
   <div>
-    <label for="person">Author:</label>
+    <label for="person">Author</label>
     <input id="person" name="person" value="{{quote.person}}">
   </div>
+  <div>
+    <button type="submit">{{submit}}</button>
+  </div>
 </fieldset>
-<div>
-  <button type="submit">{{submit}}</button>
-</div>
