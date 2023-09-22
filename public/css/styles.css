@@ -29,6 +29,10 @@ h4{
   margin: 20px;
 }
 
+a{
+  text-decoration: none;
+}
+
 header{
   display: flex;
   justify-content: space-between;
@@ -39,7 +43,18 @@ header{
 }
 
 .logo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-left: 15px;
+}
+
+.logo i{
+  margin-right: 5px;
+}
+
+.logo a{
+  color: rgb(15, 44, 89);
 }
 
 button, .link-button{
@@ -48,6 +63,7 @@ button, .link-button{
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  padding: 10px;
 }
 
 .link-button{
@@ -60,7 +76,6 @@ button, .link-button{
 }
 
 .link-button a{
-  text-decoration: none;
   color: white;
 }
 
@@ -101,8 +116,8 @@ button {
 }
 
 button:hover {
-  background-color: #5788fa;
-  transition: background-color 0.2s;
+  color: rgba(15, 44, 89, 0.5);;
+  transition: color 0.2s;
 }
 .fetch-by-author-container{
   display: flex;
@@ -121,6 +136,11 @@ button:hover {
   color: white;
   padding: 10px 20px;
   font-size: 16px;
+}
+
+#fetch-by-author:hover{
+  background-color: rgba(15, 44, 89, 0.6);
+  transition: background-color color 0.2s;
 }
 
 #quote-container {
