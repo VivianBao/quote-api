@@ -42,12 +42,16 @@ const renderQuotes = (quotes = []) => {
       // add delete alert
       const deleteAlert = document.createElement('dialog');
       deleteAlert.innerHTML = `
-      <p>Are you sure you want to delete this quote?</p>
+      <div class="confirm-dialog">
+      <h3>Are you sure you want to delete this quote?</h3>
       <form method="dialog">
       ${singleQuoteContentHTML}
+      <div class="buttons-container">
       <button id="delete-${quote.id}">Delete</button>
       <button>Return</button>
-      </form>`
+      </div>
+      </form>
+      </div>`
       document.body.appendChild(deleteAlert);
 
       // add click event to open dialog button
@@ -66,10 +70,14 @@ const renderQuotes = (quotes = []) => {
 const successfulDeleteDialog = () => {
   const deleteDialog = document.createElement('dialog');
   deleteDialog.innerHTML = `
-  <p>Quote Deleted!</p>
+  <div class="success-dialog">
+  <h3>Quote Deleted!</h3>
   <form method="dialog">
+  <div class="buttons-container">
   <button>Ok</button>
-  </form>`
+  </div>
+  </form>
+  </div>`
   document.body.appendChild(deleteDialog);
   deleteDialog.show();
 }

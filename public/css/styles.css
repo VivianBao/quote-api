@@ -187,7 +187,7 @@ input {
   text-align: right;
 }
 
-.buttons-container{
+.single-quote .buttons-container{
   align-self: center;
   display: flex;
   flex-direction: column;
@@ -195,13 +195,13 @@ input {
   gap: 15px;
 }
 
-.buttons-container .icon i{
+.single-quote .buttons-container .icon i{
   color: rgba(15, 44, 89, 0.8);
   transition: all .2s ease-in-out;
   cursor: pointer;
 }
 
-.buttons-container .icon i:hover{
+.single-quote .buttons-container .icon i:hover{
   transform: scale(1.3);
 }
 
@@ -288,4 +288,38 @@ form button {
 form button:hover{
   background-color: rgba(15, 44, 89, 0.6);
   transition: background-color 0.2s;
+}
+
+
+dialog{
+  width: 50%;
+  background-color: rgba(248, 240, 229, 1);
+  color: rgb(15, 44, 89);
+  border: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.confirm-dialog, .success-dialog{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+dialog button{
+  width: 150px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+dialog form{
+  width: 60%;
+}
+
+dialog .buttons-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
