@@ -158,7 +158,6 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
   margin-top: 40px;
 }
 
@@ -166,17 +165,17 @@ input {
   padding: 20px;
   width: 50%;
   display: flex;
-  gap: 20px;
+  /* gap: 20px; not supported on safari */
 }
 
 .quote-info-container{
-  overflow: scroll;
   align-self: stretch;
   flex-grow: 1;
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 20px;
+  margin-right: 20px; /*set gap*/
 }
 .quote-text {
   font-style: italic;
@@ -192,13 +191,14 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: right;
-  gap: 15px;
+  /* gap: 15px; */
 }
 
 .single-quote .buttons-container .icon i{
   color: rgba(15, 44, 89, 0.8);
   transition: all .2s ease-in-out;
   cursor: pointer;
+  margin: 15px 0px;
 }
 
 .single-quote .buttons-container .icon i:hover{
@@ -226,12 +226,13 @@ form fieldset{
   justify-content: center;
   align-items: center;
   padding: 50px 0px;
-  gap: 20px;
+  /* gap: 20px; */
   border: 0.5px solid rgb(15, 44, 89);
   border-radius: 10px;
 }
 
 form fieldset div {
+  margin: 20px 0px;
   width: 65%;
   display: flex;
   flex-direction: column;
@@ -321,5 +322,9 @@ dialog .buttons-container{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  /* gap: 20px; not supported on safari*/
+}
+
+.confirm-dialog .buttons-container button:first-child {
+  margin-right: 20px; /*set gap*/
 }
