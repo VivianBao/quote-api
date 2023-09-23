@@ -97,20 +97,24 @@ quotesRouter.put('/:id', (req, res)=>{
   const targetIndex = getIndexById(id, quotes);
   const updateData = req.body;
   const query = req.query;
-  if(query){
-    // getting back from edit form page and re-render
-    res.render('edit', {
-      quote: quotes[targetIndex],
-      style: 'styles.css',
-      complete: true,
-    })
-  }else if(targetIndex !== null && updateData){
+  if(targetIndex !== null && updateData){
     const oldData = quotes[targetIndex];
     quotes[targetIndex] = {...oldData, ...updateData}
-    res.render('home', {
-      quote: quotes[targetIndex],
-      style: 'styles.css'
-    })
+    if(query){
+      // getting back from edit form page and re-render
+      res.render('edit', {
+        quote: quotes[targetIndex],
+        style: 'styles.css',
+        complete: true,
+      })
+    }else{
+      const oldData = quotes[targetIndex];
+      quotes[targetIndex] = {...oldData, ...updateData}
+      res.render('home', {
+        quote: quotes[targetIndex],
+        style: 'styles.css'
+      })
+    }
   }else{
     res.status(404).send();
   }

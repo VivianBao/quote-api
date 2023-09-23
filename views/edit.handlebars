@@ -1,7 +1,13 @@
+{{> form-nav}}
 {{#if complete}}
-  <p>Quote Added!</p>
+  <h1>Quote Updated!</h1>
+  <div class="single-quote">
+    <div class="quote-info-container">
+      <div class="quote-text">{{quote.quote}}</div>
+      <div class="attribution">{{quote.person}}</div>
+    </div>
+  </div>
 {{else}}
-  {{> form-nav}}
   <h1>Edit Quote</h1>
   <form method="POST" action="/api/quotes/{{quote.id}}?_method=PUT&complete=true">
     {{> form}}
