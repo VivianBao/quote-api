@@ -83,7 +83,8 @@ quotesRouter.get('/:id', (req, res)=>{
       style: "styles.css",
       quote: quotes[targetIndex],
       title: "Create a New Quote",
-      submit: "Update Your Quote"
+      submit: "Update Your Quote",
+      complete: false
     });
   }else{
     res.status(404).send();
@@ -95,7 +96,15 @@ quotesRouter.put('/:id', (req, res)=>{
   const id = req.params.id;
   const targetIndex = getIndexById(id, quotes);
   const updateData = req.body;
-  if(targetIndex !== null && updateData){
+  const query = req.query;
+  if(query){
+    // getting back from edit form page and re-render
+    res.render('edit', {
+      quote: quotes[targetIndex],
+      style: 'styles.css',
+      complete: true,
+    })
+  }else if(targetIndex !== null && updateData){
     const oldData = quotes[targetIndex];
     quotes[targetIndex] = {...oldData, ...updateData}
     res.render('home', {

@@ -1,5 +1,9 @@
-{{> form-nav}}
-<h1>Edit Quote</h1>
-<form method="POST" action="/api/quotes/{{quote.id}}?_method=PUT">
-  {{> form}}
-</form>
+{{#if complete}}
+  <p>Quote Added!</p>
+{{else}}
+  {{> form-nav}}
+  <h1>Edit Quote</h1>
+  <form method="POST" action="/api/quotes/{{quote.id}}?_method=PUT&complete=true">
+    {{> form}}
+  </form>
+{{/if}}
