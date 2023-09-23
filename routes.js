@@ -50,25 +50,35 @@ quotesRouter.get('/new', (req, res)=>{
       person: ""
     },
     title: "Create a New Quote",
-    submit: "Create Your Quote"
+    submit: "Create Your Quote",
+    complete: false
   })
 });
 
 // [Create] Post action
 quotesRouter.post('/new', (req, res)=>{
-  const query = req.body;
-  const quoteExists = Object.keys(query).includes('quote');
-  const personExists = Object.keys(query).includes('person');
+  const quoteData = req.body;
+  const quoteExists = Object.keys(quoteData).includes('quote');
+  const personExists = Object.keys(quoteData).includes('person');
+  const query = req.query;
   if(quoteExists && personExists){
     const lastQuoteObj = quotes[quotes.length - 1];
     const newId = lastQuoteObj.id + 1
     let newQuoteObj = {
       id: newId,
-      quote: query.quote,
-      person: query.person
+      quote: quoteData.quote,
+      person: quoteData.person
     }
     quotes.push(newQuoteObj)
-    res.redirect('/api/quotes');
+    if(query){
+      res.render('new', {
+      style: "styles.css",
+      quote: newQuoteObj,
+      complete: true
+    });
+    }else{
+      res.redirect('/api/quotes');
+    }
   }else{
     res.status(400).send();
   }

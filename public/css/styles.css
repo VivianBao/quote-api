@@ -54,6 +54,10 @@ header{
   margin-left: 15px;
 }
 
+.logo:visited{
+  color: rgb(15, 44, 89);
+}
+
 .logo i{
   margin-right: 5px;
 }

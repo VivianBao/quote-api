@@ -1,5 +1,15 @@
 {{> form-nav}}
+{{#if complete}}
+<h1>Quote Added!</h1>
+<div class="single-quote">
+  <div class="quote-info-container">
+    <div class="quote-text">{{quote.quote}}</div>
+    <div class="attribution">{{quote.person}}</div>
+  </div>
+</div>
+{{else}}
 <h1>Add Your Quote</h1>
-<form method="POST" action="/api/quotes/new">
+<form method="POST" action="/api/quotes/new?complete=true">
   {{> form}}
 </form>
+{{/if}}
